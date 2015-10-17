@@ -1,0 +1,64 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion highestSdkAvailable(20)
+    buildToolsVersion latestBuildToolsAvailable("20.0.0")
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+            //jniLibs.srcDirs = ['libs']
+            //jni.srcDirs = []
+        }
+    }
+    signingConfigs {
+        release {
+            storeFile file("bear.keystore")
+            storePassword "xbearx"
+            keyAlias "bear"
+            keyPassword "xbearx"
+        }
+    }
+    buildTypes {
+        release {
+            proguardFile 'proguard-project.txt'
+            signingConfig signingConfigs.release
+            jniDebuggable false
+            debuggable false
+            minifyEnabled true
+            zipAlignEnabled true
+        }
+        beta {
+            proguardFile 'proguard-project.txt'
+            signingConfig signingConfigs.release
+            jniDebuggable false
+            debuggable true
+            minifyEnabled false
+            zipAlignEnabled true
+        }
+        debug {
+            signingConfig signingConfigs.release
+            jniDebuggable true
+            debuggable true
+            zipAlignEnabled true
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:20.0.+'
+    compile 'com.android.support:percent:22.2.0'
+    compile 'com.android.support:appcompat-v7:21.0.+'
+    compile 'com.jakewharton:butterknife:6.0.0'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
