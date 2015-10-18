@@ -26,8 +26,9 @@ android {
         }
     }
     buildTypes {
+/*
         release {
-            proguardFile 'proguard-project.txt'
+            //proguardFile 'proguard-project.txt'
             signingConfig signingConfigs.release
             jniDebuggable false
             debuggable false
@@ -35,13 +36,14 @@ android {
             zipAlignEnabled true
         }
         beta {
-            proguardFile 'proguard-project.txt'
+            //proguardFile 'proguard-project.txt'
             signingConfig signingConfigs.release
             jniDebuggable false
             debuggable true
             minifyEnabled false
             zipAlignEnabled true
         }
+*/
         debug {
             signingConfig signingConfigs.release
             jniDebuggable true

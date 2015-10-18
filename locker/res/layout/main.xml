@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     >
-<TextView
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:text="Hello World, Main"
-    />
+    <TextView
+        android:id="@+id/enable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enable"
+        android:padding="16dp"
+        />
+    <TextView
+        android:id="@+id/lock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lock"
+        android:padding="16dp"
+        />
+    <TextView
+        android:id="@+id/unlock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lock"
+        android:padding="16dp"
+        />
+    <TextView
+        android:id="@+id/disable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Disable"
+        android:padding="16dp"
+        />
 </LinearLayout>
-
