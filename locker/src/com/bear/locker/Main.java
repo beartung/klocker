@@ -33,6 +33,7 @@ public class Main extends Activity {
 
         mDevicePolicyManager = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
         mComponentName = new ComponentName(this, AdminReceiver.class);
+        startService(new Intent(this, BootService.class));
     }
 
     @OnClick(R.id.enable)
