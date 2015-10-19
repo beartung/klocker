@@ -9,6 +9,9 @@ import android.content.Intent;
 
 import android.os.Bundle;
 
+import android.view.KeyEvent;
+import android.view.WindowManager;
+
 import android.widget.Toast;
 
 import butterknife.ButterKnife;
@@ -26,8 +29,20 @@ public class Main extends Activity {
     ComponentName mComponentName;
 
     @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
+        this.getWindow().addFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+                | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                | WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+                );
         setContentView(R.layout.main);
         ButterKnife.inject(this);
 
@@ -74,6 +89,43 @@ public class Main extends Activity {
                 Toast.makeText(getApplicationContext(), "Failed to register as Admin", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    // Don't finish Activity on Back press
+    @Override
+    public void onBackPressed() {
+        return;
+    }
+
+    // Handle button clicks
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if ((keyCode == KeyEvent.KEYCODE_VOLUME_DOWN)
+                || (keyCode == KeyEvent.KEYCODE_POWER)
+                || (keyCode == KeyEvent.KEYCODE_VOLUME_UP)
+                || (keyCode == KeyEvent.KEYCODE_CAMERA)) {
+            return true;
+        }
+        if ((keyCode == KeyEvent.KEYCODE_HOME)) {
+            return true;
+        }
+        return false;
+
+    }
+
+    // handle the key press events here itself
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_UP
+                || (event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_DOWN)
+                || (event.getKeyCode() == KeyEvent.KEYCODE_POWER)) {
+            return false;
+        }
+        if ((event.getKeyCode() == KeyEvent.KEYCODE_HOME)) {
+
+            return true;
+        }
+        return false;
     }
 
 }

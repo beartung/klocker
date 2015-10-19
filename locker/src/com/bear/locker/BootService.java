@@ -44,10 +44,14 @@ public class BootService extends Service {
                 it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 if (TextUtils.equals(act, Intent.ACTION_SCREEN_ON)) {
                     KeyguardManager km = (KeyguardManager)context.getSystemService(context.KEYGUARD_SERVICE);
-                    KeyguardLock kd = km.newKeyguardLock("");
+                    KeyguardLock kd = km.newKeyguardLock("kl");
                     kd.disableKeyguard();
                     startActivity(it);
                 } else if (TextUtils.equals(act, Intent.ACTION_SCREEN_OFF)) {
+                    KeyguardManager km = (KeyguardManager)context.getSystemService(context.KEYGUARD_SERVICE);
+                    KeyguardLock kd = km.newKeyguardLock("kl");
+                    kd.reenableKeyguard();
+                    startActivity(it);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
